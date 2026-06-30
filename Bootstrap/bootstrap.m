@@ -13,16 +13,17 @@ extern int decompress_tar_zstd(const char* src_file_path, const char* dst_file_p
 
 int getCFMajorVersion()
 {
-    if(@available(iOS 18.0, *)) {
-        return 2100;
-    }
-    if(@available(iOS 17.0, *)) {
-        return 2000;
-    }
+    // Procursus uses suite "1900" for all iOS 16+ (rootless era).
+    // Verified on iPadOS 18.7.9 / palera1n 2.3: apt.procurs.us suite = 1900.
     if(@available(iOS 16.0, *)) {
         return 1900;
     }
     return ((int)kCFCoreFoundationVersionNumber / 100) * 100;
+}
+
+int getiOSMajorVersion()
+{
+    return (int)NSProcessInfo.processInfo.operatingSystemVersion.majorVersion;
 }
 
 void rebuildSignature(NSString *directoryPath)
@@ -204,7 +205,8 @@ int InstallBootstrap(NSString* jbroot_path)
     NSString* bootstrapZstFile = [NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:
                                   [NSString stringWithFormat:@"strapfiles/bootstrap-%d.tar.zst", getCFMajorVersion()]];
     if(![fm fileExistsAtPath:bootstrapZstFile]) {
-        STRAPLOG("can not find bootstrap file, maybe this version of the app is not for iOS%d", NSProcessInfo.processInfo.operatingSystemVersion.majorVersion);
+        STRAPLOG("can not find bootstrap file for iOS %d (CF suite %d), this version of the app may not support this iOS version yet",
+                 getiOSMajorVersion(), getCFMajorVersion());
         return -1;
     }
     

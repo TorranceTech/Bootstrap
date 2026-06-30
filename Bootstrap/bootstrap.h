@@ -7,6 +7,9 @@
 
 void rebuildSignature(NSString *directoryPath);
 
+int getCFMajorVersion();
+int getiOSMajorVersion();
+
 int bootstrap();
 
 int unbootstrap();

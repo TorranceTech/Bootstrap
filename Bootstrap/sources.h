@@ -41,6 +41,11 @@ Types: deb\n\
 URIs: https://static.palera.in/\n\
 Suites: ./\n\
 Components:\n\
+\n\
+Types: deb\n\
+URIs: https://apt.procurs.us/\n\
+Suites: 1900\n\
+Components: main\n\
 "
 
 #define ZEBRA_SOURCES "\
