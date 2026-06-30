@@ -13,10 +13,15 @@ extern int decompress_tar_zstd(const char* src_file_path, const char* dst_file_p
 
 int getCFMajorVersion()
 {
+    if(@available(iOS 18.0, *)) {
+        return 2100;
+    }
+    if(@available(iOS 17.0, *)) {
+        return 2000;
+    }
     if(@available(iOS 16.0, *)) {
         return 1900;
     }
-    
     return ((int)kCFCoreFoundationVersionNumber / 100) * 100;
 }
 
@@ -73,14 +78,22 @@ int fixPackageSources()
         NSString* sileoList = [NSString stringWithContentsOfFile:source encoding:NSUTF8StringEncoding error:nil];
         ASSERT(sileoList != NULL);
         
-        if([sileoList containsString:@"iphoneos-arm64e/2000"]) {
+        BOOL needsCacheReset = [sileoList containsString:@"iphoneos-arm64e/2000"]
+                            || [sileoList containsString:@"iphoneos-arm64e/2100"];
+        if(needsCacheReset) {
             if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/var/lib/apt/lists")])
                 ASSERT([NSFileManager.defaultManager removeItemAtPath:jbroot(@"/var/lib/apt/lists") error:nil]);
             if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/var/lib/apt/sileolists")])
                 ASSERT([NSFileManager.defaultManager removeItemAtPath:jbroot(@"/var/lib/apt/sileolists") error:nil]);
         }
-        
-        sileoList = [sileoList stringByReplacingOccurrencesOfString:@"iphoneos-arm64e/2000" withString:@"iphoneos-arm64e/1900"];
+
+        int cfVersion = getCFMajorVersion();
+        sileoList = [sileoList stringByReplacingOccurrencesOfString:@"iphoneos-arm64e/2100"
+                                                        withString:[NSString stringWithFormat:@"iphoneos-arm64e/%d", cfVersion]];
+        sileoList = [sileoList stringByReplacingOccurrencesOfString:@"iphoneos-arm64e/2000"
+                                                        withString:[NSString stringWithFormat:@"iphoneos-arm64e/%d", cfVersion]];
+        sileoList = [sileoList stringByReplacingOccurrencesOfString:@"iphoneos-arm64e/1900"
+                                                        withString:[NSString stringWithFormat:@"iphoneos-arm64e/%d", cfVersion]];
         
         ASSERT([sileoList writeToFile:source atomically:YES encoding:NSUTF8StringEncoding error:nil]);
     }
@@ -599,7 +612,9 @@ int unbootstrap()
     SYSLOG("bootstrap uninstalled!");
     
     [LSApplicationWorkspace.defaultWorkspace _LSPrivateRebuildApplicationDatabasesForSystemApps:YES internal:YES user:YES];
-    
+
+    // Refresh app registry depending on the privilege source available.
+    // On palera1n (iOS 18+), TrollStore is not available — use uicache instead.
     AppInfo* tsapp = [AppInfo appWithBundleIdentifier:@"com.opa334.TrollStore"];
     if(tsapp) {
         NSString* log=nil;
@@ -608,7 +623,7 @@ int unbootstrap()
             STRAPLOG("refresh tsapps failed:%@\nERR:%@", log, err);
         }
     } else {
-        STRAPLOG("trollstore not found!");
+        STRAPLOG("TrollStore not found — running under palera1n, skipping TS refresh");
     }
     
     killAllForExecutable("/usr/libexec/backboardd", SIGKILL);

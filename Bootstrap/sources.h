@@ -36,6 +36,11 @@ Types: deb\n\
 URIs: https://github.com/roothide/roothide.github.io/releases/download/%d/\n\
 Suites: ./\n\
 Components:\n\
+\n\
+Types: deb\n\
+URIs: https://static.palera.in/\n\
+Suites: ./\n\
+Components:\n\
 "
 
 #define ZEBRA_SOURCES "\
@@ -47,6 +52,7 @@ deb https://havoc.app/ ./\n\
 deb https://roothide.github.io/ ./\n\
 deb https://roothide.github.io/procursus iphoneos-arm64e/%d main\n\
 deb https://github.com/roothide/roothide.github.io/releases/download/%d/ ./\n\
+deb https://static.palera.in/ ./\n\
 \n\
 "
 
