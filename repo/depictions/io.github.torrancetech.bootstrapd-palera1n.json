@@ -1,0 +1,69 @@
+{
+  "minVersion": "0.1",
+  "class": "DepictionTabView",
+  "headerImage": "https://raw.githubusercontent.com/TorranceTech/Bootstrap/feature/ios18-palera1n-support/repo/assets/header.png",
+  "tintColor": "#5A7FE8",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "Details",
+      "views": [
+        {
+          "class": "DepictionSubheaderView",
+          "title": "What is this?"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "**Bootstrap Daemon** ports `bootstrapd` from [roothide Bootstrap](https://github.com/roothide/Bootstrap) to run natively on **palera1n**.\n\nEnables:\n- **JIT** for apps like DolphiniOS, UTM, PPSSPP\n- **SSH** server management\n- Mach IPC for tweak injection\n- Sandbox extension management\n\n> Requires palera1n 2.x jailbreak. Does **not** require roothide."
+        },
+        {
+          "class": "DepictionSeparatorView"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "Compatibility"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Jailbreak",
+          "text": "palera1n 2.x"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "iOS / iPadOS",
+          "text": "16.0 – 18.x"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Devices",
+          "text": "A8 – A11 (iPhone 6–X, iPad 5th–7th gen)"
+        },
+        {
+          "class": "DepictionSeparatorView"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "Source"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Open source at [github.com/TorranceTech/Bootstrap](https://github.com/TorranceTech/Bootstrap)\n\nBased on [roothide/Bootstrap](https://github.com/roothide/Bootstrap)."
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "Changelog",
+      "views": [
+        {
+          "class": "DepictionSubheaderView",
+          "title": "1.0.0"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- Initial release\n- Ports roothide `bootstrapd` to palera1n\n- Supports iPadOS 18 on A10 (iPad 7th gen / A10 Fusion)\n- Fixed-path shim replacing UUID-randomized roothide paths\n- Mach IPC server: `com.roothide.bootstrapd-0070616C65726131`\n- LaunchDaemon for auto-start on boot"
+        }
+      ]
+    }
+  ]
+}

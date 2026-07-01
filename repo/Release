@@ -1,0 +1,20 @@
+Origin: TorranceTech Bootstrap
+Label: TorranceTech Bootstrap
+Suite: stable
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm64 iphoneos-arm
+Components: main
+Description: palera1n Bootstrap for iPadOS/iOS 16–18
+MD5Sum:
+  816 Packages
+  508 Packages.bz2
+  438 Packages.gz
+SHA256:
+ 5bf05c80b0f200e99397d0cd269aa1cd041dc3203ad6c19848ef006183e1620c 816 Packages
+ 4f33105ea9f594456216c146e27840a57674926f6539290130197fb717792357 508 Packages.bz2
+ 911ba793886218c2fee0282867602f20272737dc6d23159521fdcdfd7c61410b 438 Packages.gz
+SHA512:
+ 5fdbc7081ece63e906e948ee97fb7c35b5be7f06db569deeca70ac34789bab085c8d3dbf0f5d53d9667f634df2793d1f88c77b50de756b48fd97718776b5fe49 816 Packages
+ b257fb0b556ae2c8514f00b10ca0ba6d25ba8337ed020c334c18e66db2cc94ec5656eb7eacf3fde591608d82a1545fcba33e2d28c5a29488cff1d8ca562f6578 508 Packages.bz2
+ 13f9757b2c66d1b98bf3bd59d6d4406c73a1c919408b99398a26fc6edccf206d887f5729a01b7ae330f223eabb48a1633f44ba2ed18975a52c6477fc3d32276b 438 Packages.gz

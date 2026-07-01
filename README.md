@@ -1,129 +1,184 @@
-# roothide Bootstrap
+# roothide Bootstrap — palera1n port
 
-[![GitHub stars](https://img.shields.io/github/stars/roothide/Bootstrap?style=social)](https://github.com/roothide/Bootstrap/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/TorranceTech/Bootstrap?style=social)](https://github.com/TorranceTech/Bootstrap/stargazers)
 
-A full featured bootstrap for iOS 15.0-17.0 A8-A17Pro & M1+M2 using roothide.
+This fork ports `bootstrapd` from [roothide Bootstrap](https://github.com/roothide/Bootstrap) to run natively on **palera1n**, enabling iPadOS/iOS 16–18 support on A8–A11 devices without roothide.
 
-##### *WARNING:* By using this software, you take full responsibility for what you do with it. Any unofficial modifications to your device may cause irreparable damage. Refer to the FAQ linked in the `Usage` section for safe usage of this software.
+> **This is not two jailbreaks stacked.** palera1n handles the kernel layer. Our `bootstrapd` is a pure userland daemon that runs inside palera1n's environment.
 
-roothide Bootstrap is available to download on this repositories [Releases](https://github.com/roothide/Bootstrap/releases).
+---
 
-## Building
+## palera1n Install Guide (iPadOS/iOS 16–18)
 
-If you do not have access to MacOS, refer to the FAQ in the `Usage` section to build with GitHub Actions instead.
+### Requirements
 
-You'll need MacOS to build, as you require Xcode from the App Store. Simply having Xcode Command Line Tools is *insufficient*. Here's how to build the Bootstrap:
+| What | Version |
+|---|---|
+| Device | A8–A11 (iPhone 6–X, iPad 5th–7th gen) |
+| iOS / iPadOS | 16.0 – 18.x |
+| Jailbreak | [palera1n](https://github.com/palera1n/palera1n) 2.x |
+| Mac | macOS 12+ with Xcode 14+ |
 
- 1. Update/Install Theos with roothide support
-    
-    ```
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
-    ```
-    *If you encounter errors from a previous Theos installation, remove Theos in its entirety before continuing.*
+### Step 1 — Jailbreak with palera1n
 
- 2. Clone the GitHub repository and enter directory
+```sh
+# Install palera1n on Mac
+brew install palera1n
 
-    ```
-    git clone https://github.com/roothide/Bootstrap/ && cd Bootstrap
-    ```
+# Jailbreak (rootless mode)
+palera1n -l
 
- 3. Build `Bootstrap.tipa`
+# Follow the on-screen DFU instructions for your device
+```
 
-    ```
-    make package
-    ```
+After the jailbreak completes, open the **palera1n** app on your device and tap **Install** to set up Sileo.
 
- 4. Transfer `Bootstrap.tipa` from `./packages/` to your device and install it with TrollStore
+### Step 2 — Add the Sileo repository
 
-## Usage
+In Sileo: **Sources → Edit → +** and add:
 
-The roothide Bootstrap application **must** be installed with [TrollStore](https://ios.cfw.guide/installing-trollstore/). Use version `2.0.9` or later for enabling developer mode on-device.
+```
+https://torrancetech.github.io/Bootstrap/repo
+```
 
-By design, roothide does not inject tweaks into any 3rd applications by default. To enable tweak injection into an application, press `App List` in the Bootstrap app, and enable the toggle of the application you want to inject into.
+Search for **"Bootstrap Daemon (palera1n)"** and install.
 
-**For installing Bootstrap**, refer to the guides at [https://onejailbreak.com/blog/bootstrap-roothide/](https://onejailbreak.com/blog/bootstrap-roothide/)
+The `postinst` script will:
+- Copy `bootstrapd` to `/var/jb/basebin/`
+- Load the LaunchDaemon → auto-starts on every boot
 
-## Develop tweaks
+### Step 3 — Verify
 
-You can refer to the developer documentation [here](https://github.com/roothide/Developer).
+```sh
+# SSH into your device and check:
+launchctl list | grep bootstrapd
+# Should show: com.palera1n.bootstrapd
+```
 
-## Discord server
+---
 
-You can join the roothide Discord server for support or general discussion [here](https://discord.gg/ZvY2Yjw8GA).
+## Building from Source
 
-## The "Our Table" Icon
+### Prerequisites
 
-The ProcursusTeam logo was originally made by [@TheAlphaStream](https://github.com/TheAlphaStream), and later edited by [@sourcelocation](https://github.com/sourcelocation).
+```sh
+# Standard Theos (NOT roothide's fork)
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
+
+# dpkg for packaging
+brew install dpkg
+```
+
+### Clone
+
+```sh
+git clone --recurse-submodules https://github.com/TorranceTech/Bootstrap
+cd Bootstrap/basebin
+```
+
+If the submodule doesn't check out the right branch:
+
+```sh
+cd basebin
+git remote add torrancetech https://github.com/TorranceTech/Bootstrap-basebin
+git fetch torrancetech
+git checkout -b feature/ios18-palera1n-support torrancetech/feature/ios18-palera1n-support
+cd ..
+```
+
+### Build
+
+```sh
+# Compile libcommon + bootstrapd
+cd basebin/common   && make clean all PALERA1N=1 && cd -
+cd basebin/bootstrapd
+
+# Build binary + create .deb
+make package-palera1n VERSION=1.0.0
+# Output: packages/io.github.torrancetech.bootstrapd-palera1n_1.0.0_iphoneos-arm64.deb
+```
+
+### Publish to repo
+
+```sh
+cp basebin/bootstrapd/packages/*.deb repo/debs/
+cd repo && ./update-repo.sh
+git add repo/ && git commit -m "release: bootstrapd-palera1n 1.0.0" && git push
+```
+
+---
+
+## Architecture
+
+```
+palera1n (kernel layer)
+└── checkm8 exploit → kernel patches → /var/jb/ symlink
+
+bootstrapd (userland daemon)
+└── Mach IPC server: com.roothide.bootstrapd-0070616C65726131
+    ├── SSH management
+    ├── JIT enabler
+    └── Sandbox extension management
+```
+
+**What we changed vs roothide:**
+- `jbroot()` shim: replaces UUID-randomized paths with fixed `/var/jb/`
+- `jbrand()` shim: returns fixed constant `0x70616C65726131` ("palera1" ASCII)
+- `jailbreakd` excluded: requires roothide kernel primitives, not available on palera1n
+- Build system: uses standard Theos (`rootless` scheme) instead of roothide's Theos fork
+
+---
+
+## Compatibility
+
+| Feature | Status |
+|---|---|
+| JIT (DolphiniOS, UTM, PPSSPP) | Works via bootstrapd IPC |
+| SSH server management | Works |
+| Mach IPC | Works — tested on iPad 7th gen / iPadOS 18.7.9 / palera1n 2.3 |
+| Tweak injection (bsctl) | In progress |
+| roothide tweaks | Not compatible (different kernel ABI) |
+
+---
+
+## FAQ
+
+**Can I use roothide tweaks?**
+No. roothide tweaks require the roothide kernel hook (`jailbreakd`). Standard palera1n tweaks work normally.
+
+**Does this work on iPhone?**
+Any A8–A11 device supported by palera1n: iPhone 6, 6s, 7, 8, X, SE (1st gen).
+
+**Is this safe?**
+We only run `bootstrapd` which is userland. palera1n does the kernel work. Same risk profile as any palera1n jailbreak.
+
+---
+
+## Contributing
+
+PRs welcome. The palera1n compat layer lives in `basebin/palera1n_compat/`. The key files:
+
+- `roothide.h` — `jbroot()`/`jbrand()` shims
+- `sandbox_ext_palera1n.m` — stub for `generate_sandbox_extensions()`
+- `layout.palera1n/` — package layout (LaunchDaemon, postinst/prerm)
+
+---
 
 ## Credits
 
-Huge thanks to these people, we couldn't have completed this project without their help!
+Port to palera1n by [TorranceTech](https://github.com/TorranceTech).
 
-- absidue: [https://github.com/absidue](https://github.com/absidue)
-- akusio: [https://twitter.com/akusio_rr](https://twitter.com/akusio_rr)
-- Alfie: [https://alfiecg.uk](https://alfiecg.uk)
-- Amy While: [http://github.com/elihwyma](http://github.com/elihwyma)
-- Barron: [https://tweaksdev22.github.io](https://tweaksdev22.github.io)
-- BomberFish: [https://twitter.com/bomberfish77](https://twitter.com/bomberfish77)
-- bswbw: [https://twitter.com/bswbw](https://twitter.com/bswbw)
-- Capt Inc: [http://github.com/captinc](http://github.com/captinc)
-- CKatri: [https://procursus.social/@cameron](https://procursus.social/@cameron)
-- Clarity: [http://github.com/TheRealClarity](http://github.com/TheRealClarity)
-- Cryptic: [http://github.com/Cryptiiiic](http://github.com/Cryptiiiic)
-- dxcool223x: [https://twitter.com/dxcool223x](https://twitter.com/dxcool223x)
-- Dhinakg: [http://github.com/dhinakg](http://github.com/dhinakg)
-- DuyKhanhTran: [https://twitter.com/TranKha50277352](https://twitter.com/TranKha50277352)
-- dleovl: [https://github.com/dleovl](https://github.com/dleovl)
-- Elias Sfeir: [https://twitter.com/eliassfeir1](https://twitter.com/eliassfeir1)
-- Ellie: [https://twitter.com/elliessurviving](https://twitter.com/elliessurviving)
-- EquationGroups: [https://twitter.com/equationgroups](https://twitter.com/equationgroups)
-- Évelyne: [http://github.com/evelyneee](http://github.com/evelyneee)
-- GeoSnOw: [https://twitter.com/fce365](https://twitter.com/fce365)
-- G3n3sis: [https://twitter.com/G3nNuk_e](https://twitter.com/G3nNuk_e)
-- hayden: [https://procursus.social/@hayden](https://procursus.social/@hayden)
-- Huy Nguyen: [https://twitter.com/little_34306](https://twitter.com/little_34306)
-- iAdam1n: [https://twitter.com/iAdam1n](https://twitter.com/iAdam1n)
-- iarrays: [https://iarrays.com](https://iarrays.com)
-- iDownloadBlog: [https://twitter.com/idownloadblog](https://twitter.com/idownloadblog)
-- iExmo: [https://twitter.com/iexmojailbreak](https://twitter.com/iexmojailbreak)
-- iRaMzi: [https://twitter.com/iramzi7](https://twitter.com/iramzi7)
-- Jonathan: [https://twitter.com/jontelang](https://twitter.com/jontelang)
-- Kevin: [https://github.com/iodes](https://github.com/iodes)
-- kirb: [http://github.com/kirb](http://github.com/kirb)
-- laileld: [https://twitter.com/h_h_x_t](https://twitter.com/h_h_x_t)
-- Leptos: [https://github.com/leptos-null](https://github.com/leptos-null)
-- limneos: [https://twitter.com/limneos](https://twitter.com/limneos)
-- Lightmann: [https://github.com/L1ghtmann](https://github.com/L1ghtmann)
-- Linus Henze: [http://github.com/LinusHenze](http://github.com/LinusHenze)
-- MasterMike: [https://ios.cfw.guide](https://ios.cfw.guide)
-- Misty: [https://twitter.com/miscmisty](https://twitter.com/miscmisty)
-- Muirey03: [https://twitter.com/Muirey03](https://twitter.com/Muirey03)
-- Nathan: [https://github.com/verygenericname](https://github.com/verygenericname)
-- Nebula: [https://itsnebula.net](https://itsnebula.net)
-- niceios: [https://twitter.com/niceios](https://twitter.com/niceios)
-- Nightwind: [https://twitter.com/NightwindDev](https://twitter.com/NightwindDev)
-- Nick Chan: [https://nickchan.lol](https://nickchan.lol)
-- nzhaonan: [https://twitter.com/nzhaonan](https://twitter.com/nzhaonan)
-- Oliver Tzeng: [https://github.com/olivertzeng](https://github.com/olivertzeng)
-- omrkujman: [https://twitter.com/omrkujman](https://twitter.com/omrkujman)
-- opa334: [http://github.com/opa334](http://github.com/opa334)
-- onejailbreak: [https://twitter.com/onejailbreak_](https://twitter.com/onejailbreak_)
-- Phuc Do: [https://twitter.com/dobabaophuc](https://twitter.com/dobabaophuc)
-- PoomSmart: [https://twitter.com/poomsmart](https://twitter.com/poomsmart)
-- ProcursusTeam: [https://procursus.social/@team](https://procursus.social/@team)
-- roothide: [http://github.com/roothide](http://github.com/roothide)
-- Sam Bingner: [http://github.com/sbingner](http://github.com/sbingner)
-- Shadow-: [http://iosjb.top/](http://iosjb.top/)
-- Snail: [https://twitter.com/somnusix](https://twitter.com/somnusix)
-- SquidGesture: [https://twitter.com/lclrc](https://twitter.com/lclrc)
-- sourcelocation: [http://github.com/sourcelocation](http://github.com/sourcelocation)
-- SeanIsTethered: [http://github.com/jailbreakmerebooted](https://github.com/jailbreakmerebooted)
-- TheosTeam: [https://theos.dev](https://theos.dev)
-- tigisoftware: [https://twitter.com/tigisoftware](https://twitter.com/tigisoftware)
-- tihmstar: [https://twitter.com/tihmstar](https://twitter.com/tihmstar)
-- xina520: [https://twitter.com/xina520](https://twitter.com/xina520)
-- xybp888: [https://twitter.com/xybp888](https://twitter.com/xybp888)
-- xsf1re: [https://twitter.com/xsf1re](https://twitter.com/xsf1re)
-- yandevelop: [https://twitter.com/yandevelop](https://twitter.com/yandevelop)
-- YourRepo: [https://twitter.com/yourepo](https://twitter.com/yourepo)
-- And ***you***, the community, for giving insightful feedback and support.
+Original roothide Bootstrap by [roothide](https://github.com/roothide) and contributors:
+
+- absidue · akusio · Alfie · Amy While · Barron · BomberFish · bswbw · Capt Inc · CKatri
+- Clarity · Cryptic · dxcool223x · Dhinakg · DuyKhanhTran · dleovl · Elias Sfeir · Ellie
+- EquationGroups · Évelyne · GeoSnOw · G3n3sis · hayden · Huy Nguyen · iAdam1n · iarrays
+- iDownloadBlog · iExmo · iRaMzi · Jonathan · Kevin · kirb · laileld · Leptos · limneos
+- Lightmann · Linus Henze · MasterMike · Misty · Muirey03 · Nathan · Nebula · niceios
+- Nightwind · Nick Chan · nzhaonan · Oliver Tzeng · omrkujman · opa334 · onejailbreak
+- Phuc Do · PoomSmart · ProcursusTeam · roothide · Sam Bingner · Shadow- · Snail
+- SquidGesture · sourcelocation · SeanIsTethered · TheosTeam · tigisoftware · tihmstar
+- xina520 · xybp888 · xsf1re · yandevelop · YourRepo
+- And the community, for giving insightful feedback and support.
+
+**WARNING:** By using this software, you take full responsibility for what you do with it. Any unofficial modifications to your device may cause irreparable damage.
