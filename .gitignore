@@ -1,0 +1,3 @@
+# Commit Packages, Release e .deb depois de rodar update-repo.sh
+# Nao commitar temporarios
+*.tmp
