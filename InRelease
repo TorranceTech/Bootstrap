@@ -1,0 +1,36 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Origin: TorranceTech Bootstrap
+Label: TorranceTech Bootstrap
+Suite: stable
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm64 iphoneos-arm
+Components: main
+Description: palera1n Bootstrap for iPadOS/iOS 16–18
+MD5Sum:
+ f609c273e93f13df9620ea80bf986410 811 Packages
+ 97df0a69631b9b39620a9770698c03ec 505 Packages.bz2
+ 0e9af76c27a544757642fc8d8b792352 438 Packages.gz
+SHA256:
+ 88047b916822104edfcd6e7744f90438cf8af33600fba299432114dd80f70f25 811 Packages
+ de50b0e978b0c793c4deba965e789c38032e9dbe561c36ef37d2f8ebace0440b 505 Packages.bz2
+ bafe81fc2fa4d37864068adb48032bd167c9b0c62008b6a61bed5c5add3ffddf 438 Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQJPBAEBCAA5FiEEAdtRlV3/v5E/NGmVhoj2Jo+oerYFAmpEmtgbFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMCwzAAoJEIaI9iaPqHq2zfYP/RGDP/Gq9F6jcr1mJphJ
+Xh3jU/iTDI62iC4UWXL3diq2MHMzXQo5XFuO7IvHB9BEyC8Jf5snyacMsiuvGHua
+gw5hzwhjPELd6g8DymgIdtpUPXqq5L7RqTymEvHejMvfPi+WeBCC2UR0P6vtHfTQ
+ur+KUbnhzAXv7KSZ01Sm8OQMnOI+X3KdmoqttiU3ySrJ4ACxA5l2f9aIVHKNpVkn
+fhWMW0M+h3zrih9/5dyQBUUynmylXd5nZlKfw5oiHDjlq71zU9I3G3k4w8If323f
+FNP8awfM2ge7xy8shVTXsKDnopB3W+por9LU7n8tIm09TTxheyICmEaAKXgQm5NZ
+rLpYyoTxMJBP1lsiK9T+LCPIAgpUrdwUc8jCt7yQzhTv4TIvRFZc9uuT53Dh44Tn
+CY1ztrvzy9cs/TdkmWIx60syw3FTo9bQnkPu8oHVL6MTW++eyJiUNmn43qMM/l7z
+HFBQoey0ZddFOoLxMjPi5+U2C/75+1kHpgIr8Tapms5FqWca2S7+Bc8SN9eKe2Ms
+V0mmLCh3kKylbIxTtMYoiHfMERrrtdh5lNxhE1aulPc8wquWskJDb59Oe7vnUEq1
+T6tOb/3lpkaVWZ/clqquubfj24bhcRe285yhwdD0rmdf28T57qdyMbqik2UahQ2G
+hFGLLbOzvriCabnMC6PkmAlk
+=xQe6
+-----END PGP SIGNATURE-----
