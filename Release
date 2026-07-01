@@ -4,8 +4,7 @@ Suite: stable
 Version: 1.0
 Codename: stable
 Architectures: iphoneos-arm64 iphoneos-arm
-Description: palera1n Bootstrap for iPadOS/iOS 16-18
-Date: Wed, 01 Jul 2026 04:49:32 UTC
+Description: palera1n Bootstrap
 MD5Sum:
  f609c273e93f13df9620ea80bf986410 811 Packages
  97df0a69631b9b39620a9770698c03ec 505 Packages.bz2
