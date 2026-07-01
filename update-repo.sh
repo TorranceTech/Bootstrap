@@ -52,7 +52,8 @@ gzip  -k -f Packages
 
 # ---- generate Release ----
 echo "Generating Release..."
-# Flat repository (no dists/, no Components) — this is what Sileo accepts here.
+# Flat repository. "Components: main" is REQUIRED: Sileo's RepoManager rejects
+# any Release without a components key ("Could not parse release file").
 cat > Release << EOF
 Origin: $REPO_ORIGIN
 Label: $REPO_LABEL
@@ -60,6 +61,7 @@ Suite: $REPO_SUITE
 Version: 1.0
 Codename: $REPO_CODENAME
 Architectures: iphoneos-arm64 iphoneos-arm
+Components: main
 Description: $REPO_DESCRIPTION
 MD5Sum:
  $(md5 Packages) $(size Packages) Packages

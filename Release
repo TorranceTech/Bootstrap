@@ -4,6 +4,7 @@ Suite: stable
 Version: 1.0
 Codename: stable
 Architectures: iphoneos-arm64 iphoneos-arm
+Components: main
 Description: palera1n Bootstrap
 MD5Sum:
  17c01d2b7525cf251420f3c088950462 811 Packages
