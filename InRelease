@@ -5,10 +5,10 @@ Origin: TorranceTech Bootstrap
 Label: TorranceTech Bootstrap
 Suite: stable
 Version: 1.0
-Codename: ios
+Codename: stable
 Architectures: iphoneos-arm64 iphoneos-arm
-Components: main
-Description: palera1n Bootstrap for iPadOS/iOS 16–18
+Description: palera1n Bootstrap for iPadOS/iOS 16-18
+Date: Wed, 01 Jul 2026 04:49:32 UTC
 MD5Sum:
  f609c273e93f13df9620ea80bf986410 811 Packages
  97df0a69631b9b39620a9770698c03ec 505 Packages.bz2
@@ -19,18 +19,18 @@ SHA256:
  bafe81fc2fa4d37864068adb48032bd167c9b0c62008b6a61bed5c5add3ffddf 438 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQJPBAEBCAA5FiEEAdtRlV3/v5E/NGmVhoj2Jo+oerYFAmpEmtgbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMCwzAAoJEIaI9iaPqHq2zfYP/RGDP/Gq9F6jcr1mJphJ
-Xh3jU/iTDI62iC4UWXL3diq2MHMzXQo5XFuO7IvHB9BEyC8Jf5snyacMsiuvGHua
-gw5hzwhjPELd6g8DymgIdtpUPXqq5L7RqTymEvHejMvfPi+WeBCC2UR0P6vtHfTQ
-ur+KUbnhzAXv7KSZ01Sm8OQMnOI+X3KdmoqttiU3ySrJ4ACxA5l2f9aIVHKNpVkn
-fhWMW0M+h3zrih9/5dyQBUUynmylXd5nZlKfw5oiHDjlq71zU9I3G3k4w8If323f
-FNP8awfM2ge7xy8shVTXsKDnopB3W+por9LU7n8tIm09TTxheyICmEaAKXgQm5NZ
-rLpYyoTxMJBP1lsiK9T+LCPIAgpUrdwUc8jCt7yQzhTv4TIvRFZc9uuT53Dh44Tn
-CY1ztrvzy9cs/TdkmWIx60syw3FTo9bQnkPu8oHVL6MTW++eyJiUNmn43qMM/l7z
-HFBQoey0ZddFOoLxMjPi5+U2C/75+1kHpgIr8Tapms5FqWca2S7+Bc8SN9eKe2Ms
-V0mmLCh3kKylbIxTtMYoiHfMERrrtdh5lNxhE1aulPc8wquWskJDb59Oe7vnUEq1
-T6tOb/3lpkaVWZ/clqquubfj24bhcRe285yhwdD0rmdf28T57qdyMbqik2UahQ2G
-hFGLLbOzvriCabnMC6PkmAlk
-=xQe6
+iQJPBAEBCAA5FiEEAdtRlV3/v5E/NGmVhoj2Jo+oerYFAmpEnGEbFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMCwzAAoJEIaI9iaPqHq2hk8P/RyIgxWFPQGvbyQd8965
+kSdcaA1t6RL5RkhBp8GLT9fyz9alR8fFEcpHUwzTHPYJj0VdiktkP5nwDyw+Ersp
+SJXemUV6cNz/grMloMgNUPZaO6oT2R71UEmMvSmlI1NmTDRFTa7Bi61ASE+pj3vZ
+7Md5NwIQ9InkKna6//fOH8pZnGNZNSy7a2IXT3BSs8SWfWHkqDq5VPWY62KT67Ag
+pPU3LjxuadRn0Z9tkckmvWgaAgN/fOdF5S6kfdjxB8AhDpDtkXJdHCeZf5hIrHB+
+ZhyxQPVM4EnwuAzkKVcaYHJOURk40hPddEYedAHH1IMYTvzwy9ovR910fQO6Iws0
+u6H6kwlA06LOKb97H+Y+RT9wVWe0w8NDP1REwcW3ltVLPnvsxFBLyrfMjPHrIqgJ
+sCv7OsgvLjBZskQn0AhCQQ0LoNVWgXnitzMRzn+DX6a3NiB+nQMBpDPFr+Lf6boS
+A6gdA5Secyo2cDQazo5q6uSs0bx2YmRqG0ZinoJiqJcKT8GLDOxnGO+hA4CjJVDD
+FU1hqcpE9mz6rKldT2RKjdgjmHAdGnBeiGyM0spXE2XfCH9oT1PRr4a9bkxpxjrd
+9nFF9tw6G3hikIJETxaLNL9fk8VgBOmm2yeMeK9gULnoCrzWbwVYyagBAanbQDcU
+x0UVBf7qrMSSPhUiT1toIv1E
+=6zCw
 -----END PGP SIGNATURE-----
