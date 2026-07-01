@@ -10,7 +10,7 @@ Tag: role::hacker
 Depends: firmware (>= 16.0)
 Filename: debs/io.github.torrancetech.bootstrapd-palera1n_1.0.0_iphoneos-arm64.deb
 Size: 20640
-MD5sum: 
+MD5sum: f3fcb3bbba39a12015415374845edf6f
 SHA1: 8121921654cebae85603fd04cb0f37cbadc625a6
 SHA256: a1aa0dda2a729676cca2bb16ef967b4c27a757faef1de0d03693cbeabc5b821c
 Depiction: https://torrancetech.github.io/Bootstrap/depictions/io.github.torrancetech.bootstrapd-palera1n.json
