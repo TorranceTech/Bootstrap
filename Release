@@ -7,10 +7,10 @@ Architectures: iphoneos-arm64 iphoneos-arm
 Components: main
 Description: palera1n Bootstrap for iPadOS/iOS 16–18
 MD5Sum:
- 2eaf5e34e2c5f36a532fc86115e839a1 838 Packages
- d4eededd40c21386b1c594abe18f3558 522 Packages.bz2
- 0a3213aee286dfb3ef390c0619831f2f 457 Packages.gz
+ f609c273e93f13df9620ea80bf986410 811 Packages
+ 97df0a69631b9b39620a9770698c03ec 505 Packages.bz2
+ 0e9af76c27a544757642fc8d8b792352 438 Packages.gz
 SHA256:
- e80d1017d24658c6360ac0ec897ab06928052f112dfd4b930a5b0f517aad6c05 838 Packages
- 013daed3d5ae066072c4b52e9205f93324913a46fca8cacfbb0bdd95151e0aba 522 Packages.bz2
- 66a81b9da71b1dcfe03ce86c8f8fe3007cf49faee27ffb00c0a0c91642919891 457 Packages.gz
+ 88047b916822104edfcd6e7744f90438cf8af33600fba299432114dd80f70f25 811 Packages
+ de50b0e978b0c793c4deba965e789c38032e9dbe561c36ef37d2f8ebace0440b 505 Packages.bz2
+ bafe81fc2fa4d37864068adb48032bd167c9b0c62008b6a61bed5c5add3ffddf 438 Packages.gz
