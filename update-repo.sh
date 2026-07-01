@@ -52,6 +52,7 @@ gzip  -k -f Packages
 
 # ---- generate Release ----
 echo "Generating Release..."
+# Flat repository (no dists/, no Components) — this is what Sileo accepts here.
 cat > Release << EOF
 Origin: $REPO_ORIGIN
 Label: $REPO_LABEL
@@ -59,7 +60,6 @@ Suite: $REPO_SUITE
 Version: 1.0
 Codename: $REPO_CODENAME
 Architectures: iphoneos-arm64 iphoneos-arm
-Components: main
 Description: $REPO_DESCRIPTION
 MD5Sum:
  $(md5 Packages) $(size Packages) Packages
@@ -69,10 +69,6 @@ SHA256:
  $(sha256 Packages) $(size Packages) Packages
  $(sha256 Packages.bz2) $(size Packages.bz2) Packages.bz2
  $(sha256 Packages.gz) $(size Packages.gz) Packages.gz
-SHA512:
- $(sha512 Packages) $(size Packages) Packages
- $(sha512 Packages.bz2) $(size Packages.bz2) Packages.bz2
- $(sha512 Packages.gz) $(size Packages.gz) Packages.gz
 EOF
 
 echo ""

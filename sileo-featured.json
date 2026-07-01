@@ -1,9 +1,0 @@
-[
-  {
-    "class": "FeaturedBannerView",
-    "title": "Bootstrap Daemon",
-    "package": "io.github.torrancetech.bootstrapd-palera1n",
-    "image": "https://raw.githubusercontent.com/TorranceTech/Bootstrap/feature/ios18-palera1n-support/repo/assets/banner.png",
-    "url": "cydia://package/io.github.torrancetech.bootstrapd-palera1n"
-  }
-]

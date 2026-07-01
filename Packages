@@ -8,10 +8,10 @@ Author: roothide (ported by TorranceTech)
 Section: System
 Priority: optional
 Filename: debs/io.github.torrancetech.bootstrapd-palera1n_1.0.0_iphoneos-arm64.deb
-Size: 20640
-MD5sum: f3fcb3bbba39a12015415374845edf6f
-SHA1: 8121921654cebae85603fd04cb0f37cbadc625a6
-SHA256: a1aa0dda2a729676cca2bb16ef967b4c27a757faef1de0d03693cbeabc5b821c
+Size: 20520
+MD5sum: 4a7fe92c1fbfeb3f05f0eb01eb8f1fc2
+SHA1: 0df629738ea5f2fc18f781d0e9e334ee3387678c
+SHA256: 0a122851187668d5ba4bb992560023a0e6a96f3046e045aafda5f191cfebc652
 Depiction: https://torrancetech.github.io/Bootstrap/depictions/io.github.torrancetech.bootstrapd-palera1n.json
 SileoDepiction: https://torrancetech.github.io/Bootstrap/depictions/io.github.torrancetech.bootstrapd-palera1n.json
 
