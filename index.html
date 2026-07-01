@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TorranceTech Bootstrap — Sileo Repository</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0d0d0d; color: #f0f0f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+    .card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 2.5rem; max-width: 480px; width: 100%; text-align: center; }
+    .badge { display: inline-block; background: #00c896; color: #000; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; margin-bottom: 1.2rem; }
+    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sub { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+    .url-box { background: #111; border: 1px solid #333; border-radius: 10px; padding: 1rem 1.2rem; font-family: monospace; font-size: 0.85rem; color: #00c896; word-break: break-all; margin-bottom: 2rem; cursor: pointer; user-select: all; }
+    .steps { text-align: left; list-style: none; counter-reset: steps; }
+    .steps li { counter-increment: steps; padding: 0.7rem 0 0.7rem 2.5rem; position: relative; border-bottom: 1px solid #222; font-size: 0.9rem; color: #ccc; }
+    .steps li:last-child { border-bottom: none; }
+    .steps li::before { content: counter(steps); position: absolute; left: 0; top: 0.65rem; background: #00c896; color: #000; width: 1.4rem; height: 1.4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
+    .pkg { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #2a2a2a; }
+    .pkg-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; }
+    .pkg-desc { color: #888; font-size: 0.82rem; }
+    .pkg-meta { display: flex; gap: 1rem; justify-content: center; margin-top: 0.8rem; }
+    .tag { background: #222; color: #999; font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; }
+    footer { margin-top: 2rem; color: #444; font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">Sileo Repository</div>
+    <h1>TorranceTech Bootstrap</h1>
+    <p class="sub">palera1n • iPadOS / iOS 16–18 • iphoneos-arm64</p>
+
+    <div class="url-box" title="Tap to select">https://torrancetech.github.io/Bootstrap</div>
+
+    <ol class="steps">
+      <li>Open <strong>Sileo</strong> on your jailbroken device</li>
+      <li>Go to <strong>Sources</strong> → tap <strong>+</strong></li>
+      <li>Paste the URL above and tap <strong>Add Source</strong></li>
+      <li>Search for <strong>Bootstrap Daemon</strong> and install</li>
+    </ol>
+
+    <div class="pkg">
+      <div class="pkg-name">Bootstrap Daemon (palera1n)</div>
+      <div class="pkg-desc">roothide bootstrapd ported for palera1n + iPadOS 18</div>
+      <div class="pkg-meta">
+        <span class="tag">v1.0.0</span>
+        <span class="tag">iphoneos-arm64</span>
+        <span class="tag">firmware ≥ 16.0</span>
+      </div>
+    </div>
+  </div>
+  <footer>by TorranceTech • <a href="https://github.com/TorranceTech/Bootstrap" style="color:#555">GitHub</a></footer>
+</body>
+</html>
